@@ -512,6 +512,14 @@ em, .serif-i { font-family: var(--font-display); font-style: italic; font-weight
 .footer-bottom { border-top-color: #4a3540; }
 .ph-badge.image-badge { color: #4a3000; }
 
+.hero-video video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: var(--focus, 50% 50%); display: block; }
+.hero-video .image-badge { z-index: 2; }
+.video-toggle { position: absolute; z-index: 3; top: 22%; right: .7rem; display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; padding: .4rem .85rem; border: 0; border-radius: 999px; background: rgba(42, 26, 34, .82); color: var(--sc-cream); font: inherit; font-size: .88rem; font-weight: 500; cursor: pointer; }
+.video-toggle svg { width: 18px; height: 18px; }
+.video-toggle:focus-visible { outline: 3px solid var(--sc-wine); outline-offset: 2px; box-shadow: 0 0 0 2px var(--sc-cream); }
+.no-js .video-toggle { display: none; }
+@media (prefers-reduced-motion: reduce) { .video-toggle { display: none; } }
+
 @media (prefers-reduced-motion: no-preference) {
 
   @view-transition { navigation: auto; }

@@ -131,6 +131,22 @@
     onTape();
   }
 
+  var hv = document.querySelector("[data-hero-video]");
+  if (hv) {
+    var vid = hv.querySelector("video"), vbtn = hv.querySelector("[data-video-toggle]"), vlab = hv.querySelector("[data-video-label]");
+    var userPaused = false, vVisible = false;
+    var vSync = function () {
+      if (!reduce() && vVisible && !userPaused) { vid.play().catch(function () {}); } else { vid.pause(); }
+      if (vbtn) { vbtn.setAttribute("aria-pressed", userPaused ? "true" : "false"); vlab.textContent = userPaused ? "Play video" : "Pause video"; }
+    };
+    if (vbtn) vbtn.addEventListener("click", function () { userPaused = !userPaused; vSync(); });
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (es) { vVisible = es[0].isIntersecting; vSync(); }, { threshold: 0.2 }).observe(hv);
+    }
+    var mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (mq.addEventListener) mq.addEventListener("change", vSync);
+  }
+
   if (finePointer && !reduce()) {
     document.querySelectorAll("[data-tilt]").forEach(function (card) {
       var raf = 0;
